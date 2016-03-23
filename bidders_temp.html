@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" href="./libs/bootstrap/dist/css/bootstrap.css"/>
+	<link rel="stylesheet" href="./css/animate.css"/>
+	<style>
+		/* addBiddersBody S */
+		/* Header S */
+		#addBiddersBody{
+			width:298px;
+			border: 1px solid #e2e2e2;
+			border-radius:2px;
+			padding-bottom:1px;
+		}
+		#addBiddersBody .header{
+			padding:10px 10px;
+			height:32px;
+			border-bottom: 1px solid #e3e3e3;
+			background:#f5f5f5;
+		}
+		#addBiddersBody .header span{
+			height:32px;
+			margin:0;
+			padding:0;
+			margin-top:-4px;
+			cursor:pointer;
+			font-weight:bold;
+		}
+		#addBiddersBody .content{
+			border-bottom:1px solid #ddd;
+			background:#f8f8f8;
+		}
+		#addBiddersBody .content .c_input{padding:10px 10px;}
+		#addBiddersBody ul, #addBiddersBody li {list-style:none;margin:0;padding:0;}
+		#addBiddersBody .nav-tabs{padding:0 10px;}
+		#addBiddersBody .bidderTitle{position:relative;}
+		#addBiddersBody .nav-tabs a{padding: 0 10px;color:#333;font-weight:bold;}
+		#addBiddersBody .nav-tabs a:after{position:absolute;display:inline-block;width:72px;height:1px;content:'';background:#fff;top:21px;left:-1px;}
+		/* Header E */
+		/* Content S */
+		#addBiddersBody .biddersList li{
+			padding:0 10px;
+			height:32px;
+			line-height:32px;
+			background:#fff;
+			color:#888;
+			cursor:pointer;
+		}
+		#addBiddersBody .biddersList .active{
+			background-color:#4078c0 !important; color:#fff !important;
+		}
+		#addBiddersBody .biddersList .createBiddersA{
+			background-color:#4078c0;
+			color:#fff;
+			font-weight: bold;
+		}
+		#addBiddersBody .biddersList .createBidders{
+			background-color:#fff;
+			color:#666;
+			font-weight: bold;
+		}
+		#addBiddersBody .biddersList .createBidders span{
+			color:#4078c0;
+		}
+		/* Content E */
+		/* addBiddersBody E */
+	</style>
+</head>
+<body>
+<div id="addBiddersBody">
+	<div class="header"><span class="pull-left">切换bidder</span><span class="pull-right">&times;</span></div>
+	<div class="content">
+		<div class="c_input"><input type="text" class="form-control" placeholder="切换或创建一个bidder"/></div>
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="active bidderTitle"><a href="#a_bidders" data-toggle="tab">bidders</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="a_bidders">
+				<ul class="biddersList">
+					<li><span class="glyphicon glyphicon-ok" style="visibility: hidden;"></span>&nbsp;&nbsp;master</li>
+					<li class="active"><span class="glyphicon glyphicon-ok" style=""></span>&nbsp;&nbsp;dev</li>
+					<li><span class="glyphicon glyphicon-ok" style="visibility: hidden;"></span>&nbsp;&nbsp;master</li>
+					<li class="createBiddersA"><span class="glyphicon glyphicon-hand-right" style=""></span>&nbsp;&nbsp;创建bidder&nbsp;:&nbsp;Screen</li>
+					<li class="createBidders"><span class="glyphicon glyphicon-hand-right" style=""></span>&nbsp;&nbsp;创建bidder&nbsp;:&nbsp;Screen</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="./libs/jquery/dist/jquery.min.js"></script>
+<script src="./libs/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

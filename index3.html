@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{width:200px;height:200px;background:red;position:absolute;top:100px;left:100px;}
+    </style>
+</head>
+<body>
+    <div id="box" data-bidder="nihao"></div>
+    <select name="" id="">
+        <option value=""><input type="checkbox" name="" id="1"/>吕威</option>
+        <option value=""><input type="checkbox" name="" id="2"/>吕威</option>
+        <option value=""><input type="checkbox" name="" id="3"/>吕威</option>
+        <option value=""><input type="checkbox" name="" id="4"/>吕威</option>
+    </select>
+
+
+    <script src="./libs/jquery/dist/jquery.min.js"></script>
+    <script>
+        var bidders = [
+            { "id" : "55a4eb8dda71df0c00d53aad", "name" : "mobile", "path": "http://www.baidu.com", "qps": 20 },
+            { "id" : "55a4eb8dda71df0c00d53aae", "name" : "PC2"},
+            { "id" : "565db2c19ed61c5fcc714f7e", "name" : "12"},
+            { "id" : "565db37dbc06e696ce1787ac", "name" : "23" },
+            { "id" : "565db37dbc06e696ce1787ad", "name" : "df" },
+            { "id" : "565db42a59b3d0bbcebf18ca", "name" : "dfd" }
+        ];
+
+        function indexOfArray(arr, key, value) {
+            var index = -1;
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i][key] == value) {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        function filterArray(arr, key, reg) {
+            var _arr = [];
+
+            for (var i = 0; i < arr.length; i++) {
+                if (reg.test(arr[i][key])) {
+                    _arr.push(arr[i]);
+                }
+            }
+            return _arr;
+        }
+
+        console.log(indexOfArray(bidders, 'selected', 1));
+    </script>
+</body>
+</html>
