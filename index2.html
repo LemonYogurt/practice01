@@ -20,7 +20,24 @@
                 <h4 class="modal-title">设置bidders</h4>
             </div>
             <div class="modal-body" id="addBiddersChoose" style="position:relative;">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="bidderPath" class="control-label">地址：</label>
+                        <input type="url" class="form-control" id="bidderPath" placeholder="例如:http://www.xxx.cn">
+                    </div>
+                    <div class="form-group"></div>
+                    <div class="form-group">
+                        <label for="bidderQPS" class="control-label">QPS：</label>
+                        <input type="number" class="form-control" id="bidderQPS" placeholder="QPS"  style="width:auto;" />
+                    </div>
+                    <div class="form-group"></div>
+                    <div class="form-group">
+                        <a href="javascript:void(0);" class="btn btn-success">保存</a>
+                    </div>
+                </form>
+                <div style="height:20px;"></div>
                 <button id="switchBiddersBtn" class="btn btn-success"><i>Bidder: </i><span class="bidderContent"></span> <span class="caret"></span></button>
+                <!-- addBiddersBody S -->
                 <div id="addBiddersBody" style="display:none;box-shadow:0 0 0.9em #bfbfbf;position:relative;top:10px;">
                     <div class="header"><span class="pull-left">切换bidder</span><span id="J_closeAddBidder" class="pull-right">&times;</span></div>
                     <div class="content">
@@ -40,6 +57,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- addBiddersBody E -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

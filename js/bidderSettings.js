@@ -1,16 +1,28 @@
+// 伪造数据
 var bidders = [
-    { "id" : "55a4eb8dda71df0c00d53aad", "name" : "mobile", "path": "http://www.baidu.com", "qps": 20 },
-    { "id" : "55a4eb8dda71df0c00d53aae", "name" : "PC2", "selected": 1 },
-    { "id" : "565db2c19ed61c5fcc714f7e", "name" : "12",  "selected": 0 },
-    { "id" : "565db37dbc06e696ce1787ac", "name" : "23" },
-    { "id" : "565db37dbc06e696ce1787ad", "name" : "df" },
-    { "id" : "565db42a59b3d0bbcebf18ca", "name" : "dfd" }
+    { "id" : "55a4eb8dda71df0c00d53aad", "name" : "mobile", "path": "http://www.mobile.com", "qps": 20 },
+    { "id" : "55a4eb8dda71df0c00d53aae", "name" : "PC2", "path": "http://www.pc2.com", "qps": 10, "selected": 1 },
+    { "id" : "565db2c19ed61c5fcc714f7e", "name" : "12",  "path": "http://www.12.com", "qps": 30, "selected": 0 },
+    { "id" : "565db37dbc06e696ce1787ac", "name" : "23", "path": "http://www.23.com", "qps": 40},
+    { "id" : "565db37dbc06e696ce1787ad", "name" : "df", "path": "http://www.23.com", "qps": 50},
+    { "id" : "565db42a59b3d0bbcebf18ca", "name" : "dfd", "path": "http://www.23.com", "qps": 60}
 ];
+
+// 定义一个定时器
 var timer = null;
+
+// 当页面加载之后，显示模态框
 $('#addBiddersModal').modal('show');
+
+// 定义工具方法
 function ControlBidders() {
 
 }
+
+/*
+定义工具方法 S
+ */
+// 根据输入的key和value得到数组的下标
 ControlBidders.prototype.indexOfArray = function (arr, key, value) {
     var index = -1;
     for (var i = 0; i < arr.length; i++) {
@@ -21,7 +33,25 @@ ControlBidders.prototype.indexOfArray = function (arr, key, value) {
     }
     return index;
 };
+// 根据正则，过滤数组
+ControlBidders.prototype.filterArray = function (arr, key, reg) {
+    var _arr = [];
 
+    for (var i = 0; i < arr.length; i++) {
+        if (reg.test(arr[i][key])) {
+            _arr.push(arr[i]);
+        }
+    }
+    return _arr;
+};
+
+/*
+ 定义工具方法 E
+ */
+
+/*
+初始化
+ */
 ControlBidders.prototype.init = function () {
     this.display();
     this.insertBidders(bidders, true);
@@ -29,6 +59,7 @@ ControlBidders.prototype.init = function () {
     this.click(bidders);
     this.del(bidders);
 };
+
 /*
  弹出框的显示与隐藏
  */
@@ -56,24 +87,6 @@ ControlBidders.prototype.display = function () {
         } else {
             _self.hide();
         }
-
-//            function isParent (obj, parentObj){
-//                while (obj != undefined && obj != null && obj.tagName.toUpperCase() != 'BODY'){
-//                    if (obj == parentObj){
-//                        return true;
-//                    }
-//                    obj = obj.parentNode;
-//                }
-//                return false;
-//            }
-//            $(document).click(function(e){
-//                var elem = e.target;
-//                if ($(elem).attr('id') == 'switchBiddersBtn' || isParent(elem, $('#addBiddersBody')[0])) {
-//                    return;
-//                } else {
-//                    _self.hide();
-//                }
-//            });
     });
 
     // 点击弹出框上面的x按钮时，也能关闭弹出框
@@ -95,9 +108,11 @@ ControlBidders.prototype.hide = function () {
         $('#addBiddersBody').hide();
     }, 500);
 };
+
 /*
  插入bidders
  */
+// initFlag表示初始化标识
 ControlBidders.prototype.insertBidders = function (bidders, initFlag) {
     var _html = '';
     var flag = false;
@@ -115,6 +130,8 @@ ControlBidders.prototype.insertBidders = function (bidders, initFlag) {
         if (bidders[i].name == visible) {
             flag = true;
             $('.bidderContent').html(visible);
+            $('#bidderPath').val(bidders[i].path);
+            $('#bidderQPS').val(bidders[i].qps);
             _html += '<li class="bidderItem active">' +
                 '<p data-bidder="'+bidders[i].name+'" class="pull-left">' +
                 '<span class="glyphicon glyphicon-ok activeBidderOK" style="visibility: visible;"></span>&nbsp;&nbsp;' +
@@ -145,7 +162,7 @@ ControlBidders.prototype.insertBidders = function (bidders, initFlag) {
 };
 
 /*
- 鼠标移入移出事件
+ 鼠标移入移出事件（加样式）
  */
 ControlBidders.prototype.hover = function () {
     // 鼠标移入事件
@@ -181,7 +198,7 @@ ControlBidders.prototype.hover = function () {
     });
 };
 /*
- 鼠标点击事件
+ 鼠标点击事件，在真正的数据上进行操作
  */
 ControlBidders.prototype.click = function (bidders) {
     var _self = this;
@@ -189,7 +206,6 @@ ControlBidders.prototype.click = function (bidders) {
         var elem = e.target;
         var _$elem = null;
         var targetName = e.target.nodeName.toLowerCase();
-        console.log(targetName);
         switch (targetName) {
             case 'a':
             case 'input':
@@ -205,6 +221,9 @@ ControlBidders.prototype.click = function (bidders) {
                 break;
         }
         if (targetName != 'a' && targetName != 'input') {
+            if (_$elem.find('.saveBidder').length == 1) {
+                return ;
+            }
             $('#addBiddersModal .activeBidderOK').css('visibility', 'hidden');
             _$elem.find('.activeBidderOK').css('visibility', 'visible');
             // 让上层的button切换
@@ -215,43 +234,32 @@ ControlBidders.prototype.click = function (bidders) {
             }
             var _index = _self.indexOfArray(bidders, 'name', _bidder);
             bidders[_index]['selected'] = 1;
+            $('#bidderPath').val(bidders[_index].path);
+            $('#bidderQPS').val(bidders[_index].qps);
         }
     });
 };
 
 /*
- 删除功能
+ 删除功能，操作数据
  */
 ControlBidders.prototype.del = function (bidders) {
     var _self = this;
     // li的className是bidderItem
     $('#biddersList').on('click', '.delBidder', function (e) {
-        if ($('#biddersList').find('.bidderItem').length <=1) {
+        if (bidders.length <=1) {
             $('#biddersList').find('.delBidder').attr('title', '至少要有一个bidder');
         } else {
             var $parent = $(e.target).parent().parent();
             var _$parent = $parent.parent();
             var _$ok = $parent.find('.activeBidderOK');
             var _bidder = _$ok.next().html();
-            if (_$ok.css('visibility') == 'visible') {
-                _$parent[0].removeChild($parent[0]);
-                _$ok = $('#biddersList').find('.activeBidderOK').eq(0);
-                _$ok.css('visibility', 'visible');
-                _$ok.parent().parent().addClass('active');
-                // 让上层的button切换
-                $('.bidderContent').html(_$ok.next().html());
-                for (var j = 0; j < bidders.length; j++) {
-                    bidders[j]['selected'] = 0;
-                }
-                bidders[_self.indexOfArray(bidders, 'name', _$ok.next().html())]['selected'] = 1;
-            } else {
-                _$parent[0].removeChild($parent[0]);
-                _$ok = $('#biddersList').find('.activeBidderOK').eq(0);
-                _$ok.parent().parent().addClass('active');
-            }
+            _$parent[0].removeChild($parent[0]);
 
             var _index = _self.indexOfArray(bidders, 'name', _bidder);
             bidders.splice(_index, 1);
+            _self.insertBidders(bidders, true);
+            $('.searchOrCreateBidder').val('');
         }
     });
 };
@@ -263,6 +271,7 @@ ControlBidders.prototype.modifyOperator = function () {
     // 在modify中调用了recoverBidder
     this.modify();
     this.saveBiddle(bidders);
+    this.keySaveBidder();
     this.cancelBidder();
 };
 /*
@@ -330,6 +339,39 @@ ControlBidders.prototype.saveBiddle = function (bidders) {
         }
     });
 };
+ControlBidders.prototype.keySaveBidder = function () {
+    var _self = this;
+    $('#biddersList').on('keydown', '.bidderInput', function (e) {
+        if (e.keyCode == 13) {
+            var $elem = $(e.target);
+            var $parent = $elem.parent();
+            var $nextParent = $parent.next();
+            var $replaceElem = $elem;
+            var bidder = $parent.attr('data-bidder');
+            var _index = _self.indexOfArray(bidders, 'name', bidder);
+            var _bidder = $replaceElem.val().trim();
+            // 如果用户没有作修改，则不需要设置data-bidder的值，如果修改了，则需要进行变更
+            if (bidder != _bidder) {
+                $parent.attr('data-bidder', _bidder);
+                bidder = _bidder;
+            }
+            var span = '<span>'+bidder+'</span>';
+            var $span = $(span);
+            // 将文本框替换成span
+            $replaceElem.replaceWith($span);
+
+            var operator = '<a class="btn-sm modifyBidder" href="javascript:void(0);">修改</a>' +
+                '<a href="javascript:void(0);" class="btn-sm delBidder">删除</a>';
+
+            // 将父节点下的按钮替换成修改和删除按钮
+            $nextParent.html(operator);
+            bidders[_index]['name'] = bidder;
+            if ($parent.find('.activeBidderOK').css('visibility') == 'visible') {
+                $('.bidderContent').html(bidder);
+            }
+        }
+    });
+};
 /*
  点击取消按钮
  */
@@ -386,15 +428,11 @@ ControlBidders.prototype.recoverBidder = function () {
 /**
  *  修改功能 E
  */
-var tools = new ControlBidders();
-tools.init();
-tools.modifyOperator();
 
-function ControlBidders2() {
-
-}
-
-ControlBidders2.prototype.searchOrCreateBidder = function (bidders) {
+/*
+ 切换和创建bidder S
+ */
+ControlBidders.prototype.searchOrCreateBidder = function (bidders) {
     var _self = this;
     // 获取当前选中的内容
     $('.searchOrCreateBidder').keyup(function () {
@@ -408,7 +446,7 @@ ControlBidders2.prototype.searchOrCreateBidder = function (bidders) {
     });
 };
 
-ControlBidders2.prototype.createBidder = function (bidders) {
+ControlBidders.prototype.createBidder = function (bidders) {
     $('#biddersList').on('click', '.createBiddersA', function () {
         var obj = {
             "name" : $('.searchOrCreateBidder').val(),
@@ -416,28 +454,21 @@ ControlBidders2.prototype.createBidder = function (bidders) {
             "qps": "",
             "selected": 1
         };
-
         for (var j = 0; j < bidders.length; j++) {
             bidders[j]['selected'] = 0;
         }
 
         bidders.unshift(obj);
         tools.insertBidders(bidders, true);
-        $('.searchOrCreateBidder').val('')
+        $('.searchOrCreateBidder').val('');
     });
 };
+/*
+ 切换和创建bidder E
+ */
 
-ControlBidders2.prototype.filterArray = function (arr, key, reg) {
-    var _arr = [];
-
-    for (var i = 0; i < arr.length; i++) {
-        if (reg.test(arr[i][key])) {
-            _arr.push(arr[i]);
-        }
-    }
-    return _arr;
-};
-
-var tools2 = new ControlBidders2();
-tools2.searchOrCreateBidder(bidders);
-tools2.createBidder(bidders);
+var tools = new ControlBidders();
+tools.init();
+tools.modifyOperator();
+tools.searchOrCreateBidder(bidders);
+tools.createBidder(bidders);
