@@ -1,0 +1,120 @@
+/* animated S */
+.animated{-webkit-animation-duration:.5s;-moz-animation-duration:.5s;-ms-animation-duration:.5s;-o-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;}
+@-webkit-keyframes fadeOutUp{0%{opacity:1;-webkit-transform:translateY(0);}
+    100%{opacity:0;-webkit-transform:translateY(-20px);}
+}
+@-moz-keyframes fadeOutUp{0%{opacity:1;-moz-transform:translateY(0);}
+    100%{opacity:0;-moz-transform:translateY(-20px);}
+}
+@-ms-keyframes fadeOutUp{0%{opacity:1;-ms-transform:translateY(0);}
+    100%{opacity:0;-ms-transform:translateY(-20px);}
+}
+@-o-keyframes fadeOutUp{0%{opacity:1;-o-transform:translateY(0);}
+    100%{opacity:0;-o-transform:translateY(-20px);}
+}
+@keyframes fadeOutUp{0%{opacity:1;transform:translateY(0);}
+    100%{opacity:0;transform:translateY(-20px);}
+}
+.fadeOutUp{-webkit-animation-name:fadeOutUp;-moz-animation-name:fadeOutUp;-ms-animation-name:fadeOutUp;-o-animation-name:fadeOutUp;animation-name:fadeOutUp;}
+@-webkit-keyframes fadeInUp{0%{opacity:0;-webkit-transform:translateY(20px);}
+    100%{opacity:1;-webkit-transform:translateY(0);}
+}
+@-moz-keyframes fadeInUp{0%{opacity:0;-moz-transform:translateY(20px);}
+    100%{opacity:1;-moz-transform:translateY(0);}
+}
+@-ms-keyframes fadeInUp{0%{opacity:0;-ms-transform:translateY(20px);}
+    100%{opacity:1;-ms-transform:translateY(0);}
+}
+@-o-keyframes fadeInUp{0%{opacity:0;-o-transform:translateY(20px);}
+    100%{opacity:1;-o-transform:translateY(0);}
+}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(20px);}
+    100%{opacity:1;transform:translateY(0);}
+}
+.fadeInUp{-webkit-animation-name:fadeInUp;-moz-animation-name:fadeInUp;-ms-animation-name:fadeInUp;-o-animation-name:fadeInUp;animation-name:fadeInUp;}
+/* animated E */
+/* addBiddersModal S*/
+#switchBiddersBtn {cursor:pointer;outline:none;background-image: linear-gradient(#fcfcfc, #eee);color:#333;}
+#switchBiddersBtn i{font-style:normal;font-weight:500;opacity:0.6;filter:alpha(opacity=60);}
+#switchBiddersBtn .bidderContent{color:#000;font-weight:700;}
+#switchBiddersBtn:hover{background-color:#5cb85c;}
+#switchBiddersBtn.selected{
+    background-color: #dcdcdc;
+    background-image: none;
+    border-color: #5cb85c;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.15);
+}
+/* addBiddersModal E*/
+/* addBiddersBody S */
+/* Header S */
+#addBiddersBody{
+    width:298px;
+    border: 1px solid #e2e2e2;
+    border-radius:2px;
+    padding-bottom:1px;
+}
+#addBiddersBody .header{
+    padding:10px 10px;
+    height:32px;
+    border-bottom: 1px solid #e3e3e3;
+    background:#f5f5f5;
+}
+#addBiddersBody .header span{
+    height:32px;
+    margin:0;
+    padding:0;
+    margin-top:-4px;
+    cursor:pointer;
+    font-weight:bold;
+}
+#addBiddersBody .content{
+    border-bottom:1px solid #ddd;
+    background:#f8f8f8;
+}
+#addBiddersBody .content .c_input{padding:10px 10px;}
+#addBiddersBody ul, #addBiddersBody li {list-style:none;margin:0;padding:0;}
+#addBiddersBody .nav-tabs{padding:0 10px;}
+#addBiddersBody .bidderTitle{position:relative;}
+#addBiddersBody .nav-tabs a{padding: 0 10px;color:#333;font-weight:bold;}
+#addBiddersBody .nav-tabs a:after{position:absolute;display:inline-block;width:72px;height:1px;content:'';background:#fff;top:21px;left:-1px;}
+/* Header E */
+/* Content S */
+#addBiddersBody .biddersList li{
+    padding:0 10px;
+    height:32px;
+    line-height:32px;
+    background:#fff;
+    color:#888;
+    cursor:pointer;
+}
+#addBiddersBody .biddersList p{
+    margin:0;
+    padding:0;
+}
+#addBiddersBody .biddersList p a{
+    font-weight:normal;
+}
+#addBiddersBody .biddersList .active{
+    background-color:#4078c0 !important; color:#fff !important;
+}
+#addBiddersBody .biddersList .active a{
+    color:#fff !important;
+}
+#addBiddersBody .biddersList .createBiddersA{
+    background-color:#4078c0;
+    color:#fff;
+    font-weight: bold;
+}
+#addBiddersBody .biddersList .createBiddersA a{
+    color:#fff !important;
+}
+#addBiddersBody .biddersList .createBidders{
+    background-color:#fff;
+    color:#666;
+    font-weight: bold;
+}
+#addBiddersBody .biddersList .createBidders .glyphicon{
+    color:#4078c0;
+}
+/* Content E */
+/* addBiddersBody E */
